@@ -1,46 +1,63 @@
 import java.util.ArrayList;
 
 public class Catalogue {
-    private Livre[] listeLivres;
+    // Attributs
+    private ArrayList<Livre> listeLivres;
 
-    public Livre[] rechercheLivre(String titre) {
-        Livre[] resultats = new Livre[0];
+    // Constructeur par défaut
+    public Catalogue() {
+        this.listeLivres = new ArrayList<>();
+    }
+
+    // Constructeur avec paramètres
+    public Catalogue(ArrayList<Livre> listeLivres) {
+        this.listeLivres = listeLivres;
+    }
+
+    // Méthode rechercheLivre par titre
+    public Livre rechercheLivre(String titre) {
         for (Livre livre : listeLivres) {
-            if (livre.getTitre().contains(titre)) {
-                resultats = ajouter(resultats, livre);
+            if (livre.getTitre().equals(titre)) {
+                return livre;
             }
         }
-        return resultats;
+        return null;
     }
 
-    public Livre[] rechercheParAuteur(String auteur) {
-        Livre[] resultats = new Livre[0];
+
+    // Méthode rechercheParAuteur
+    public ArrayList<Livre> rechercheParAuteur(String auteur) {
+        ArrayList<Livre> livresTrouves = new ArrayList<>();
         for (Livre livre : listeLivres) {
-            if (livre.getAuteur().contains(auteur)) {
-                resultats = ajouter(resultats, livre);
+            if (livre.getAuteur().equals(auteur)) {
+                livresTrouves.add(livre);
             }
         }
-        return resultats;
+        return livresTrouves;
     }
 
-    public Livre[] rechercheParGenre(String genre) {
-        Livre[] resultats = new Livre[0];
+    // Méthode rechercheParGenre
+    public ArrayList<Livre> rechercheParGenre(String genre) {
+        ArrayList<Livre> livresTrouves = new ArrayList<>();
         for (Livre livre : listeLivres) {
-            if (livre.getGenre().contains(genre)) {
-                resultats = ajouter(resultats, livre);
+            if (livre.getGenre().equals(genre)) {
+                livresTrouves.add(livre);
             }
         }
-        return resultats;
+        return livresTrouves;
+    }
+
+    // Méthode ajouterLivre
+    public void ajouterLivre(Livre livre) {
+        listeLivres.add(livre);
     }
 
 
-
-
-
-    private Livre[] ajouter(Livre[] tab, Livre element) {
-        Livre[] nouveauTab = new Livre[tab.length + 1];
-        System.arraycopy(tab, 0, nouveauTab, 0, tab.length);
-        nouveauTab[tab.length] = element;
-        return nouveauTab;
+    // Méthode afficherCatalogue
+    public void afficherCatalogue() {
+        for (Livre livre : listeLivres) {
+            livre.afficherDetaille();
+        }
     }
+
 }

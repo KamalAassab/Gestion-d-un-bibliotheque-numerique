@@ -1,36 +1,67 @@
 import java.util.ArrayList;
 
 public class Utilisateur {
+
+    // Attributs
     private int id;
     private String nom;
-    private String motedepasse;
+    private String motDePasse;
     private int numero;
-    private int note;
-    private String commentaire;
     private String email;
-    private ArrayList<Livre> historiqueEmprunts ;
+    private ArrayList<Livre> historiqueEmprunts; // Liste d'historiques des livres empruntés
+    private ArrayList<String> commentaires; // Liste des commentaires
+    private ArrayList<Integer> notes; // Liste des notes
 
 
+    // Constructeur avec paramètres
+    public Utilisateur(int id, String nom, String motDePasse, int numero, String email) {
+        this.id = id; // Corrected this line to assign the id
+        this.nom = nom;
+        this.motDePasse = motDePasse;
+        this.numero = numero;
+        this.email = email;
+        this.historiqueEmprunts = new ArrayList<>();
+        this.commentaires = new ArrayList<>(); // initialiser commentaires
+        this.notes = new ArrayList<>(); // Initialiser notes
+    }
 
-    public void ajouterEmprunt (Livre livre){
+    // Méthode pour commenter un livre
+    public void commenter(Livre livre, String commentaire) {
+        commentaires.add(commentaire); // Stocker le commentaire
+        System.out.println(nom + " a commenté sur le livre " + livre.getTitre() + " : " + commentaire);
+    }
+
+    // Méthode pour noter un livre
+    public void noter(Livre livre, int note) {
+        notes.add(note); // Stocker la note
+        System.out.println(nom + " a noté le livre " + livre.getTitre() + " : " + note);
+    }
+
+    // Méthode ajouterEmprunt pour ajouter un emprunt
+    public void ajouterEmprunt(Livre livre) {
         historiqueEmprunts.add(livre);
     }
 
-    public void creerListePersonnalise(){
-        // A implementer
+    // Méthode creerListePersonnalise pour créer une liste personnalisée
+    public ArrayList<Livre> creerListePersonnalise(Livre livre) {
+        ArrayList<Livre> listePersonnalise = new ArrayList<>();
+        listePersonnalise.add(livre);
+        return listePersonnalise;
     }
 
-    public void sInscrire(){
-        // A implementer
+    // Méthode sInscrire
+    public void sInscrire() {
+        System.out.println("Inscription reussie pour " + nom);
+        // You can add more code here to store the user data in a database, etc.
     }
 
-    public void seConnecter(){
-        // A implementer
+    // Méthode seConnecter
+    public void seConnecter() {
+        // Implement connection logic here BDD
+        System.out.println(nom + " vous etes connecte.");
     }
 
-
-
-    // getters et setters
+    // Getters et setters
     public int getId() {
         return id;
     }
@@ -47,12 +78,12 @@ public class Utilisateur {
         this.nom = nom;
     }
 
-    public String getMotedepasse() {
-        return motedepasse;
+    public String getMotdepasse() {
+        return motDePasse;
     }
 
-    public void setMotedepasse(String motedepasse) {
-        this.motedepasse = motedepasse;
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
 
     public int getNumero() {
@@ -63,20 +94,12 @@ public class Utilisateur {
         this.numero = numero;
     }
 
-    public int getNote() {
-        return note;
+    public ArrayList<String> getCommentaires() {
+        return commentaires;
     }
 
-    public void setNote(int note) {
-        this.note = note;
-    }
-
-    public String getCommentaire() {
-        return commentaire;
-    }
-
-    public void setCommentaire(String commentaire) {
-        this.commentaire = commentaire;
+    public ArrayList<Integer> getNotes() {
+        return notes;
     }
 
     public String getEmail() {
@@ -94,5 +117,4 @@ public class Utilisateur {
     public void setHistoriqueEmprunts(ArrayList<Livre> historiqueEmprunts) {
         this.historiqueEmprunts = historiqueEmprunts;
     }
-
 }

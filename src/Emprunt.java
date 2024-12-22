@@ -1,51 +1,93 @@
+import java.time.LocalDate;
+
 public class Emprunt {
+    //Attributs
     private int id;
     private Utilisateur utilisateur;
     private Livre livre;
-    private String dateEmprunts;
-    private String LimiteDuree;
+    private LocalDate dateEmprunts;
+    private LocalDate dateRetour; // Date de retour supposée
+    private LocalDate dateRetourLivre; // Date de retour que l'utilisateur a renseigné
 
-    public int CalculeDeRetard(){
-        return 0;
+    // constructeur avec paramètres
+    public Emprunt(Utilisateur utilisateur, Livre livre, LocalDate dateEmprunts) {
+        this.utilisateur = utilisateur;
+        this.livre = livre;
+        this.dateEmprunts = dateEmprunts;
+        this.dateRetour = dateEmprunts.plusDays(20);
+        this.dateRetourLivre = null;
     }
 
-public int getId() {
-    return id;
-}
+    // Methode pour calculer le retard
+    public int calculeDeRetard() {
+        if (dateRetourLivre != null) { // Si la date de retour du livre est renseignée
 
-public void setId(int id) {
-    this.id = id;
-}
+            if (dateRetourLivre.compareTo(dateRetour) <= 0) { // Si la date de retour du livre est avant la date de retour supposée
+                return 0; // pas de retard
 
-public Utilisateur getUtilisateur() {
-    return utilisateur;
-}
+            } else { // Si la date de retour du livre est apres la date de retour supposée
 
-public void setUtilisateur(Utilisateur utilisateur) {
-    this.utilisateur = utilisateur;
-}
+                return (int) (dateRetourLivre.toEpochDay() - dateRetour.toEpochDay()); // Retourne le nombre de jours de retard
+            }
+        }
+        else{ // Si la date de retour du livre n'est pas renseignée
+                if(LocalDate.now().compareTo(dateRetour)<=0) { // Si la date actuelle est avant la date de retour
 
-public Livre getLivre() {
-    return livre;
-}
+                    return 0; // pas de retard
 
-public void setLivre(Livre livre) {
-    this.livre = livre;
-}
+                } else { // Si la date actuelle est apres la date de retour
 
-public String getDateEmprunts() {
-    return dateEmprunts;
-}
+                    return (int) (LocalDate.now().toEpochDay() - dateRetour.toEpochDay());
+                }
+            }
+    }
 
-public void setDateEmprunts(String dateEmprunts) {
-    this.dateEmprunts = dateEmprunts;
-}
 
-public String getLimiteDuree() {
-    return LimiteDuree;
-}
+    // Getters et Setters
+    public int getId() {
+        return id;
+    }
 
-public void setLimiteDuree(String limiteDuree) {
-    LimiteDuree = limiteDuree;
-}
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
+    public LocalDate getDateEmprunts() {
+        return dateEmprunts;
+    }
+
+    public void setDateEmprunts(LocalDate dateEmprunts) {
+        this.dateEmprunts = dateEmprunts;
+    }
+
+    public LocalDate getDateRetour() {
+        return dateRetour;
+    }
+
+    public void setDateRetour(LocalDate dateRetour) {
+        this.dateRetour = dateRetour;
+    }
+
+    public LocalDate getDateRetourLivre() {
+        return dateRetourLivre;
+    }
+    public void setDateRetourLivre(LocalDate dateRetourLivre) {
+        this.dateRetourLivre = dateRetourLivre;
+    }
 }

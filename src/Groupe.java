@@ -1,11 +1,22 @@
+import java.util.ArrayList;
+
 public class Groupe {
     private int id;
     private String nomGroupe;
-    private Utilisateur[] membres;
+    private ArrayList<Utilisateur> membres = new ArrayList<>();
     private String type;
 
-    public void ajouterMembre(Utilisateur membre) {
 
+
+    public void ajouterMembre(Utilisateur membre) {
+        for (Utilisateur membreExistant : membres) {
+            if (membreExistant.getNom().equals(membre.getNom())) {
+                System.out.println("Le membre " + membre.getNom() + " est déjà dans le groupe.");
+                return; // Sortir si le membre existe déjà
+            }
+        }
+        membres.add(membre);
+        System.out.println("Le membre " + membre.getNom() + " a été ajouté au groupe.");
     }
 
     public void afficherMembres() {
@@ -33,11 +44,11 @@ public class Groupe {
         this.nomGroupe = nomGroupe;
     }
 
-    public Utilisateur[] getMembres() {
+    public ArrayList<Utilisateur> getMembres() {
         return membres;
     }
 
-    public void setMembres(Utilisateur[] membres) {
+    public void setMembres(ArrayList<Utilisateur> membres) {
         this.membres = membres;
     }
 

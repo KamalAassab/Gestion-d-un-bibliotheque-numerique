@@ -1,10 +1,19 @@
 public class Document {
+    //Attributs
     private int id;
     private String titre;
     private String auteur;
     private String genre;
 
+    //Constructeur avec paramètres
+    public Document(int id, String titre, String auteur, String genre) {
+        this.id = id;
+        this.titre = titre;
+        this.auteur = auteur;
+        this.genre = genre;
+    }
 
+    // Getters et Setters
     public int getId() {
         return id;
     }
