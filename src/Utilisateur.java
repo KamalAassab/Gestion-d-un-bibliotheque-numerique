@@ -11,15 +11,19 @@ public class Utilisateur {
     private ArrayList<Livre> historiqueEmprunts; // Liste d'historiques des livres empruntés
     private ArrayList<String> commentaires; // Liste des commentaires
     private ArrayList<Integer> notes; // Liste des notes
+    private Catalogue catalogue;
+    private Livre livre;
 
 
     // Constructeur avec paramètres
-    public Utilisateur(int id, String nom, String motDePasse, int numero, String email) {
+    public Utilisateur(int id, String nom, String motDePasse, int numero, String email,Catalogue catalogue,Livre livre ) {
         this.id = id; // Corrected this line to assign the id
         this.nom = nom;
         this.motDePasse = motDePasse;
         this.numero = numero;
         this.email = email;
+        this.catalogue = catalogue;
+        this.livre = livre;
         this.historiqueEmprunts = new ArrayList<>();
         this.commentaires = new ArrayList<>(); // initialiser commentaires
         this.notes = new ArrayList<>(); // Initialiser notes
@@ -117,4 +121,31 @@ public class Utilisateur {
     public void setHistoriqueEmprunts(ArrayList<Livre> historiqueEmprunts) {
         this.historiqueEmprunts = historiqueEmprunts;
     }
+
+    public Catalogue getCatalogue() {
+        return catalogue;
+    }
+
+    public void setCatalogue(Catalogue catalogue) {
+        this.catalogue = catalogue;
+    }
+
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+    //les methodes
+    public void rechercheLivre(String titre){
+        catalogue.rechercheLivre(titre);
+    }
+    public void rechercheParAuteur(String auteur){
+        catalogue.rechercheParAuteur(auteur);
+    }
+    public void rechercheParGenre(String genre){
+        catalogue.rechercheParGenre(genre);
+    }
+
 }
