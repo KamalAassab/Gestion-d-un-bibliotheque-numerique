@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 
 public class Groupe {
+
+    // Attributs
     private int id;
     private String nomGroupe;
     private ArrayList<Utilisateur> membres = new ArrayList<>();
     private String type;
 
 
-
+    // Methode pour ajouter un membre au groupe
     public void ajouterMembre(Utilisateur membre) {
         for (Utilisateur membreExistant : membres) {
             if (membreExistant.getNom().equals(membre.getNom())) {
@@ -19,6 +21,7 @@ public class Groupe {
         System.out.println("Le membre " + membre.getNom() + " a été ajouté au groupe.");
     }
 
+    // Methoe pour afficher les membres d'un groupe
     public void afficherMembres() {
         System.out.println("Groupe: " + nomGroupe);
         System.out.println("Type: " + type);
@@ -28,6 +31,7 @@ public class Groupe {
     }
 
 
+    // Getters et Setters
     public int getId() {
         return id;
     }

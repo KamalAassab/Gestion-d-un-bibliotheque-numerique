@@ -13,8 +13,7 @@ public class Livre extends Document{
 
     // Methode afficherDetaille de Livre
     public void afficherDetaille() {
-        System.out.println("Résumé: " + resume);
-        System.out.println("Disponibilité: " + (disponibilite ? "Disponible" : "Indisponible"));
+        System.out.println("Le livre de numéro: " + getId() + " intitulé: " + getTitre() + " auteur: " + getAuteur() + " genre: " + getGenre() + " resume: " + getResume());
     }
 
     //Getters et Setters

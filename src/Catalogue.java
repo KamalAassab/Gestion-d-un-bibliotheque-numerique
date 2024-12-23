@@ -6,11 +6,13 @@ public class Catalogue {
 
     // Constructeur par défaut
     public Catalogue() {
+
         this.listeLivres = new ArrayList<>();
     }
 
     // Constructeur avec paramètres
     public Catalogue(ArrayList<Livre> listeLivres) {
+
         this.listeLivres = listeLivres;
     }
 
@@ -49,6 +51,7 @@ public class Catalogue {
 
     // Méthode ajouterLivre
     public void ajouterLivre(Livre livre) {
+
         listeLivres.add(livre);
     }
 

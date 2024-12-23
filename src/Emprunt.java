@@ -10,7 +10,8 @@ public class Emprunt {
     private LocalDate dateRetourLivre; // Date de retour que l'utilisateur a renseigné
 
     // constructeur avec paramètres
-    public Emprunt(Utilisateur utilisateur, Livre livre, LocalDate dateEmprunts) {
+    public Emprunt(int id, Utilisateur utilisateur, Livre livre, LocalDate dateEmprunts) {
+        this.id = id;
         this.utilisateur = utilisateur;
         this.livre = livre;
         this.dateEmprunts = dateEmprunts;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Utilisateur {
+public abstract class Utilisateur {
 
     // Attributs
     private int id;
@@ -13,6 +13,7 @@ public class Utilisateur {
     private ArrayList<Integer> notes; // Liste des notes
     private Catalogue catalogue;
     private Livre livre;
+    private String role;
 
 
     // Constructeur avec paramètres
@@ -27,6 +28,7 @@ public class Utilisateur {
         this.historiqueEmprunts = new ArrayList<>();
         this.commentaires = new ArrayList<>(); // initialiser commentaires
         this.notes = new ArrayList<>(); // Initialiser notes
+        this.role = role;
     }
 
     // Méthode pour commenter un livre
@@ -64,6 +66,19 @@ public class Utilisateur {
         // Implement connection logic here BDD
         System.out.println(nom + " vous etes connecte.");
     }
+
+    public void rechercheLivre(String titre){
+        catalogue.rechercheLivre(titre);
+    }
+    public void rechercheParAuteur(String auteur){
+        catalogue.rechercheParAuteur(auteur);
+    }
+    public void rechercheParGenre(String genre){
+        catalogue.rechercheParGenre(genre);
+    }
+
+    //Méthode abstract
+    public abstract void afficherInfos();
 
     // Getters et setters
     public int getId() {
@@ -137,15 +152,11 @@ public class Utilisateur {
     public void setLivre(Livre livre) {
         this.livre = livre;
     }
-    //les methodes
-    public void rechercheLivre(String titre){
-        catalogue.rechercheLivre(titre);
-    }
-    public void rechercheParAuteur(String auteur){
-        catalogue.rechercheParAuteur(auteur);
-    }
-    public void rechercheParGenre(String genre){
-        catalogue.rechercheParGenre(genre);
-    }
+
+    public String getRole() {return role;}
+
+    public void setRole(String role) {this.role = role;}
+
+
 
 }

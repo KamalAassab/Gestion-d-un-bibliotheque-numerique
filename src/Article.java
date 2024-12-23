@@ -11,10 +11,12 @@ public class Article extends Document {
 
     //Getter et Setter
     public int getNumArticle() {
+
         return numArticle;
     }
 
     public void setNumArticle(int numArticle) {
+
         this.numArticle = numArticle;
     }
 }

@@ -3,15 +3,15 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        // Step 1: Create a Catalogue
+        // Creation d'un catalogue
         Catalogue catalogue = new Catalogue();
 
-        // Step 2: Create some books (Livres)
-        Livre livre1 = new Livre(1, "The Great Gatsby", "F. Scott Fitzgerald", "Fiction", "A novel set in the 1920s.", true);
-        Livre livre2 = new Livre(2, "1984", "George Orwell", "Dystopian", "A novel about a totalitarian regime.", true);
-        Livre livre3 = new Livre(3, "To Kill a Mockingbird", "Harper Lee", "Fiction", "A novel about racial injustice.", false);
+        // Creation des livres
+        Livre livre1 = new Livre(1, "La Boîte à Merveilles", "Ahmed Sefrioui", "autobiographique", "Ce roman raconte l'enfance de l'auteur à Fès, au Maroc.", true);
+        Livre livre2 = new Livre(2, "Antigone", "Jean Anouilh", "Tragédie", "Antigone défie le roi Créon en enterrant son frère Polynice, condamné comme traître.", true);
+        Livre livre3 = new Livre(3, "Le Dernier Jour d'un Condamné", "Victor Hugo", "Roman à thèse", "Un condamné à mort réfléchit à sa peur et à l'inhumanité de la peine de mort.", false);
 
-        // Step 3: Add books to the catalogue and insert into the database
+        // Insertion des livres dans le catalogue
         catalogue.ajouterLivre(livre1);
         DatabaseConnection.insertLivre(livre1);
 
@@ -21,57 +21,59 @@ public class Main {
         catalogue.ajouterLivre(livre3);
         DatabaseConnection.insertLivre(livre3);
 
-        // Step 4: Create an Admin
-        Admin admin = new Admin(1, "AdminUser ", "adminPass", 123456789, "admin@example.com", catalogue, null);
+        // Creation d'un admin
+        Admin admin = new Admin(1, "EL MOSTAFA ", "POO_JAVA", 123456789, "makroum.fsts@gmail.com", catalogue, null);
+        DatabaseConnection.insertAdmin(admin, admin);
 
-        // Step 5: Admin adds a new book
-        Livre livre4 = new Livre(4, "Brave New World", "Aldous Huxley", "Dystopian", "A novel about a futuristic society.", true);
-        admin.ajouterLivre(livre4);
-        DatabaseConnection.insertLivre(livre4); // Insert into database
+        // Admin creer un livre
+        Livre livre4 = new Livre(4, "L'Étranger", "Albert Camus", "Roman", "Meursault, indifférent, commet un meurtre et est jugé, remettant en question le sens de la vie.", true);
+        admin.ajouterLivre(livre4); // Ajoute le livre au catalogue
+        DatabaseConnection.insertLivre(livre4); // Inserer le livre dans la base de donnée
 
-        // Step 6: Admin searches for a book by title
-        Livre foundLivre = catalogue.rechercheLivre("1984");
-        if (foundLivre != null) {
-            System.out.println("Found book: " + foundLivre.getTitre());
+        // l'Amdin va rechercher un livre par titre
+        Livre livreRechercher = catalogue.rechercheLivre("Anitgone");
+        if (livreRechercher != null) {
+            System.out.println("livre trouvé: " + livreRechercher.getTitre());
         } else {
-            System.out.println("Book not found.");
+            System.out.println("Livre non trouvé.");
         }
 
-        // Step 7: Admin searches for books by author
-        ArrayList<Livre> livresByAuthor = catalogue.rechercheParAuteur("Harper Lee");
-        System.out.println("Books by Harper Lee:");
-        for (Livre livre : livresByAuthor) {
+        // l'Admin va rechercher un livre par auteur
+        ArrayList<Livre> livresParAuteur = catalogue.rechercheParAuteur("Victor Hugo");
+        System.out.println("Les livres de Victor Hugo:");
+        for (Livre livre : livresParAuteur) {
             System.out.println(livre.getTitre());
         }
 
-        // Step 8: Create a Reader (Lecteur)
-        Lecteur lecteur = new Lecteur(2, "ReaderUser ", "readerPass", 987654321, "reader@example.com", catalogue, null);
+        // Creation d'un lecteur
+        Lecteur lecteur = new Lecteur(2, "Nissrin", "SITD_POO", 987654321, "nissrin.fsts@gmail.com", catalogue, null);
+        DatabaseConnection.insertLecteur(lecteur, lecteur);
 
-        // Step 9: Reader searches for a book by genre
-        ArrayList<Livre> livresByGenre = catalogue.rechercheParGenre("Dystopian");
-        System.out.println("Dystopian books:");
-        for (Livre livre : livresByGenre) {
+        // Lecteur chercher un livre par genre
+        ArrayList<Livre> livreParGenre = catalogue.rechercheParGenre("Tragédie");
+        System.out.println("livres de genre Tragédie:");
+        for (Livre livre : livreParGenre) {
             System.out.println(livre.getTitre());
         }
 
-        // Step 10: Reader comments on a book
-        lecteur.commenter(livre1, "An amazing read!");
-        lecteur.noter(livre1, 5);
+        // Lecteur ajouter un commentaire et une note sur un livre
+        lecteur.commenter(livre1, "Interessant !");
+        lecteur.noter(livre1, 8);
 
-        // Step 11: Create a Borrow (Emprunt)
-        Emprunt emprunt = new Emprunt(lecteur, livre1, LocalDate.now());
-        lecteur.ajouterEmprunt(livre1); // Add to borrow history
+        // Creation d'un emprunt
+        Emprunt emprunt = new Emprunt(5, lecteur, livre1, LocalDate.now());
+        lecteur.ajouterEmprunt(livre1);
+        DatabaseConnection.insertEmprunt(emprunt);
         System.out.println("Emprunt created for: " + emprunt.getLivre().getTitre());
 
-        // Step 12: Create a Reservation
-        Reservation reservation = new Reservation(lecteur, LocalDate.now(), 1); // Example reservation
+        // Creation d'une reservation
+        Reservation reservation = new Reservation(lecteur, LocalDate.now(), 1);
         reservation.afficherInfosReservation();
+        DatabaseConnection.insertReservation(reservation, lecteur);
 
-        // Step 13: Display the current catalogue
-        System.out.println("Current Catalogue:");
+        //Afficher le catalogue
+        System.out.println("Catalogue Actuel:");
         catalogue.afficherCatalogue();
 
-        // Step 14: Check for any errors in database insertion
-        // This can be done by checking the database directly or by observing console outputs.
     }
 }

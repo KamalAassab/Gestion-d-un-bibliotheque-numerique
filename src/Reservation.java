@@ -12,10 +12,25 @@ public class Reservation {
         this.id_reservation = id_reservation;
     }
 
+    //getters et setters
+    public LocalDate getDateReservation() {
+        return dateReservation;
+    }
 
-public void afficherInfosReservation() {
-    System.out.println("ID de la réservation: " + id_reservation);
-    System.out.println("Date de la réservation: " + dateReservation);
-    System.out.println("ID de l'utilisateur: " + utilisateur);
-}
+    public void setDateReservation(LocalDate dateReservation) {
+        this.dateReservation = dateReservation;
+    }
+
+    public int getId_reservation() {
+        return id_reservation;
+    }
+
+    public void setId_reservation(int id_reservation) {
+        this.id_reservation = id_reservation;
+    }
+
+    // Methode pour afficher les infos de la reservation
+    public void afficherInfosReservation() {
+        System.out.println("La reservation du numéro: " + id_reservation + " est faite par " + utilisateur.getNom() + " le " + dateReservation);
+    }
 }
